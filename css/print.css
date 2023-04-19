@@ -8,5 +8,15 @@
 }
 
 .chinese-font {
-    font-family: "kaiti", Verdana, Tahoma;
+    font-family: 'kaiti', sans-serif;
+    /* font-size: 20px; */  /* TODO: fix font baseline */
+}
+
+span.chinese-font, p.chinese-font {
+    font-size: 20px;  /* TODO: fix font baseline */
+}
+
+h5.chinese-font {
+    font-size: 20px;  /* TODO: fix font baseline */
+    color: #3d4351
 }

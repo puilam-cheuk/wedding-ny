@@ -230,6 +230,16 @@
         border-radius: 0;
     }
 
+    .map .leftcol {
+        padding: 0 15px;
+        margin-bottom: 15px;
+        border-right: none;
+    }
+
+    .map .rightcol {
+        padding: 0 20px;
+    }
+    
     #map-content-wrapper {
         margin-bottom: 40px;
     }
@@ -352,7 +362,6 @@
     .down-arrow {
         display: none;
     }
-
 }
 
 @media screen and (max-width: 320px) {

@@ -56,8 +56,8 @@ ul li {
 section .header {
   padding-bottom: 30px;
 }
-.section-padding {
-  padding: $section-padding;
+.section-margin {
+  margin: $section-margin;
 }
 .section-border {
   border-bottom: 1px solid $keyline-color;
@@ -252,7 +252,7 @@ Hero
 ========================================================================== */
 .hero {
   min-height: 750px;
-  background: url('../img/hero-min.jpg') center center;
+  background: url('../img/gold_sparkles_with_red_back.png') center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -370,6 +370,10 @@ header {
   bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
+}
+
+.down-arrow-height {
+  height: 90px;
 }
 
 /* ==========================================================================
@@ -638,9 +642,9 @@ Features-stack
 }
 
 /* ==========================================================================
-Instagram
+Share Photos
 ========================================================================== */
-#instagram {
+#share-photos {
   img {
     width: 100%;
   }
@@ -742,10 +746,16 @@ Embed video
 /* ==========================================================================
 Google map
 ========================================================================== */
-#map-canvas {
-  height: 500px;
-  width: 100%;
+.map {
+  .leftcol {
+    padding-right: 100px;
+    border-right: solid 1px $keyline-color;
+  }
+  .rightcol {
+    padding-left: 100px;
+  }
 }
+
 #map-content-wrapper {
   position: relative;
   margin-top: -502px;
@@ -886,6 +896,9 @@ footer {
 /* ==========================================================================
 Bootstrap override
 ========================================================================== */
+.modal-dialog{
+  top: 30vh;
+}
 body.modal-open {
   padding-right:0 !important;
 }
