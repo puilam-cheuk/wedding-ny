@@ -1,10 +1,10 @@
 // Layout variables partial
 
-$section-margin: 40px 0;
+$section-padding: 20px 0;
 
-section.invitation, section.share-photos, section.map {
+section.invitation, section.share-photos, section.faq, section.rsvp {
 	background: $section-light;
 }
-section.events, section.eng-pics, section.rsvp {
+section.events, section.eng-pics,  section.map {
 	background: $section-dark;
 }

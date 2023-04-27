@@ -230,6 +230,12 @@
         border-radius: 0;
     }
 
+    .faq .leftcol {
+        padding: 0 15px;
+        margin-bottom: 15px;
+        border-right: none;
+    }
+
     .map .leftcol {
         padding: 0 15px;
         margin-bottom: 15px;

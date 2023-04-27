@@ -10,6 +10,7 @@
 .chinese-font {
     font-family: 'kaiti', sans-serif;
     /* font-size: 20px; */  /* TODO: fix font baseline */
+    vertical-align: top;
 }
 
 span.chinese-font, p.chinese-font {

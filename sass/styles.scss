@@ -56,8 +56,8 @@ ul li {
 section .header {
   padding-bottom: 30px;
 }
-.section-margin {
-  margin: $section-margin;
+.section-padding {
+  padding: $section-padding;
 }
 .section-border {
   border-bottom: 1px solid $keyline-color;
@@ -560,7 +560,7 @@ Features-stack
   .time {
     font-size: 13px;
     font-style: italic;
-    text-transform: lowercase;
+    text-transform: none;
     color: $txt-primary;
   }
 }
@@ -744,6 +744,15 @@ Embed video
 }
 
 /* ==========================================================================
+FAQ
+========================================================================== */
+.faq {
+  .container {
+    padding-left: 15px;
+  }
+}
+
+/* ==========================================================================
 Google map
 ========================================================================== */
 .map {
@@ -863,6 +872,9 @@ footer {
   .content {
     border-top: 1px solid $keyline-color;
     padding-bottom: 20px;
+  }
+  p {
+    font-size: 10px;
   }
   .to-top-wrapper {
     font-size: 30px;
