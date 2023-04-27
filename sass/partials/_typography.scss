@@ -1,10 +1,22 @@
 // Typography partial
 @import "partials/colors";
 
+@font-face {
+  font-family: 'kaiti';
+  src: url('../fonts/KaiTi.ttf');
+}
+
+@font-face {
+  font-family: 'Hey Lovely';
+  src: url('../fonts/hey-lovely.ttf');
+}
+
 // Fonts
 
 $sans-serif: 'Open Sans', sans-serif;
 $serif: Merriweather, Georgia, 'Times New Roman', serif;
+$chinese-font: 'kaiti', sans-serif;
+$script-font: 'Hey Lovely', sans-serif;
 $accent-font: 'Ink Free', sans-serif;
 
 // Weights
