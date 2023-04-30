@@ -281,7 +281,7 @@ Hero
 ========================================================================== */
 .hero {
   min-height: 750px;
-  background: url('../img/gold_sparkles_with_red_back.png') center center;
+  background: url('../img/gold_sparkles_with_red_back.png') center top;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -348,6 +348,7 @@ header {
   }
   .logo img {
     height: 48px;
+    padding-left: 25px;
   }
   ul.primary-nav {
     margin: 0 0 0 75px;
@@ -434,144 +435,6 @@ Intro
 }
 #intro p {
   text-align: center;
-}
-
-/* ==========================================================================
-Features-stack
-========================================================================== */
-.features {
-  position: relative;
-
-  p {
-    margin-bottom: 0;
-    padding-bottom: 0;
-  }
-  h3 {
-    margin: 0 0 20px 0;
-  }
-  span.icon {
-    font-size: 35px;
-    color: $accent-color;
-    font-weight: bold;
-  }
-  .feature-icon {
-    display: inline-block;
-    vertical-align: top;
-    padding: 6px 0 0 0;
-    margin-right: 20px;
-    width: 35px;
-  }
-  .feature-content {
-    display: inline-block;
-    width: 75%;
-  }
-  .intro-icon {
-    display: inline-block;
-    vertical-align: top;
-    padding: 6px 0 0 0;
-    margin-right: 20px;
-  }
-  .intro-content {
-    display: inline-block;
-    width: 80%;
-  }
-  ul.features-stack {
-    margin-top: 50px;
-  }
-  ul.features-stack li {
-    margin-top: 20px;
-    padding-bottom: 20px;
-    border-bottom: solid 1px $keyline-color;
-  }
-  ul.features-stack li:last-child {
-    padding-bottom: 0px;
-    border-bottom: none;
-  }
-  .ipad-wrap {
-    width: 706px;
-    height: 1002px;
-    background: url("../img/ipad-device.png") no-repeat center center;
-    z-index: 1;
-  }
-  .iphone-wrap {
-    width: 304px;
-    height: 620px;
-    background: url("../img/iphone6.png") no-repeat center center;
-    position: absolute;
-    left: 530px;
-    bottom: 129px;
-    z-index: 2;
-  }
-  .device-showcase {
-    position: absolute;
-    bottom: -365px;
-    right: 61%;
-  }
-}
-.features .responsive-feature-img, .features-extra .responsive-feature-img {
-  display: none;
-}
-.devices {
-  position: relative;
-}
-
-/* ==========================================================================
-.features-extra
-========================================================================== */
-.features-extra {
-  position: relative;
-  z-index: 3;
-
-  .btn {
-    margin-top: 20px;
-  }
-  .macbook-wrap {
-    position: absolute;
-    width: 916px;
-    height: 540px;
-    background: url("../img/macbook-pro.png") no-repeat center center;
-    top: 114px;
-    z-index: 4;
-    left: 50%;
-  }
-}
-
-/* ==========================================================================
-.hero-strip
-========================================================================== */
-.hero-strip {
-  margin-top: 120px;
-  background: #333844 url("../img/polygonal-bg.jpg") no-repeat center center;
-  padding-bottom: 190px;
-  position: relative;
-
-  i {
-    font-family: $accent-font;
-    font-weight: 300;
-    font-size: 25px;
-    color: #F69D52;
-    vertical-align: top;
-    margin-left: -8px;
-    font-style: normal;
-  }
-  h2 {
-    color: #fff;
-    margin: 0 0 20px 0;
-  }
-  p {
-    color: #ACB1B4;
-  }
-  .btn {
-    margin-top: 10px;
-  }
-  .logo-placeholder {
-    width: 230px;
-    height: 230px;
-    position: absolute;
-    bottom: -285px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
 }
 
 /* ==========================================================================
