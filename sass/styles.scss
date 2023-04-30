@@ -213,7 +213,7 @@ Navigation
 }
 .nav-toggle {
   position: absolute;
-  top: 0;
+  top: 14px;
   right: 15px;
   z-index: 999999;
   padding: 10px 35px 16px 0;
@@ -347,7 +347,7 @@ header {
     display: inline-block;
   }
   .logo img {
-    height: 19px;
+    height: 48px;
   }
   ul.primary-nav {
     margin: 0 0 0 75px;
@@ -388,7 +388,7 @@ header {
   .member-actions {
     position: absolute;
     right: 0;
-    top: 41px;
+    top: 54px;
     transition: all 300ms ease-in-out;
   }
 }
