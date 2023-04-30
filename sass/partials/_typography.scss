@@ -4,6 +4,7 @@
 @font-face {
   font-family: 'kaiti';
   src: url('../fonts/KaiTi.ttf');
+  unicode-range: U+4E00-9FFF;
 }
 
 @font-face {
@@ -15,7 +16,7 @@
 
 $sans-serif: 'Open Sans', sans-serif;
 $serif: Merriweather, Georgia, 'Times New Roman', serif;
-$chinese-font: 'kaiti', sans-serif;
+$chinese-font: 'kaiti', 'Open Sans', sans-serif;
 $script-font: 'Hey Lovely', sans-serif;
 $accent-font: 'Ink Free', sans-serif;
 
