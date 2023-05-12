@@ -15,6 +15,12 @@ gulp.task('sass', function () {
         .pipe(browserSync.stream());
 });
 
+// compile scss to css
+gulp.task('css', function () {
+    return gulp.src('./css/*.css')
+        .pipe(browserSync.stream());
+});
+
 // minify js
 gulp.task('minify-js', function () {
     return gulp.src('./js/scripts.js')
@@ -29,6 +35,7 @@ gulp.task('serve', function () {
         server: './'
     });
 
+    gulp.watch('./css/**/*.css', gulp.series('css'));
     gulp.watch('./sass/**/*.scss', gulp.series('sass'));
     gulp.watch('./js/scripts.js', gulp.series('minify-js'));
     gulp.watch('./index.html').on('change', browserSync.reload);
