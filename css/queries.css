@@ -1,24 +1,5 @@
-@media screen and (max-width: 1200px) {
-    header {
-        width: 90%;
-        margin: 0 auto;
-    }
-
-    .intro-content {
-        display: inline-block;
-        width: 70%;
-    }
-
-}
-
-@media screen and (max-width: 1024px) {
-    .hero .hero-content {
-        padding-top: 50%;
-    }
-}
-
 /* Responsive nav kicks in */
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 1200px) {
     header {
         width: 90%;
         padding-left: 0px;
