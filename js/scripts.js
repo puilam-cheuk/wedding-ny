@@ -108,7 +108,7 @@ $(document).ready(function () {
                     "padding": "50px 0"
                 });
                 $('header .member-actions').css({
-                    "top": "51px",
+                    "top": "54px",
                 });
                 $('header .navicon').css({
                     "top": "48px",
