@@ -181,9 +181,9 @@
     .events .rightcol {
         padding: 0 20px;
     }
-    
-    #eng-pics .img-wrap {
-        border-radius: 0;
+
+    #eng-pics .row {
+        margin-bottom: 30px;
     }
 
     .faq .leftcol {
@@ -201,11 +201,11 @@
     .map .rightcol {
         padding: 0 20px;
     }
-    
+
     #map-content-wrapper {
         margin-bottom: 40px;
     }
-    
+
     #map-content {
         margin-top: 0;
         padding: 35px;
@@ -224,6 +224,16 @@
     }
 }
 
+@media screen and (max-width: 990px) {
+    #eng-pics .img-wrap {
+        margin-bottom: 15px;
+    }
+
+    #eng-pics .row {
+        margin-bottom: 0px;
+    }
+}
+
 @media screen and (max-width: 640px) {
     .hero .hero-content {
         padding-top: 50%;
@@ -235,12 +245,13 @@
         width: 25px;
         height: 25px;
         top: 10px;
-        right: 10px; }
+        right: 10px;
+    }
 
     #map-content-wrapper {
         margin-bottom: 0;
     }
-    
+
     footer ul.footer-group {
         border-top: none;
     }
@@ -271,7 +282,7 @@
     .hero .hero-content {
         padding-top: 100%;
     }
-    
+
     .hero .hero-content img {
         width: 95%;
     }

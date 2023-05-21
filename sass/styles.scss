@@ -671,6 +671,7 @@ Engagement Pics
     position: relative;
     overflow: hidden;
     border-radius: 4px;
+    margin-bottom: 0px;
   }
 
   .img-wrap .overlay {
@@ -733,6 +734,10 @@ Engagement Pics
     left: 34%;
     top: 75%;
     z-index: -1;
+  }
+
+  .row {
+    margin-bottom: 30px;
   }
 }
 
