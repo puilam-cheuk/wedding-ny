@@ -173,7 +173,7 @@ $(document).ready(function () {
         e.preventDefault();
         var data = $(this).serialize();
 
-        $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> We are saving your details.'));
+        $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> We are looking up your details.'));
 
         $.get('https://script.google.com/macros/s/AKfycbxNt0nokofAbTOHcIEnZnHrq_C9yXjzq_wDjbzUx_8Xfc_u9yeRlbivP9rB7Sd5YhsX/exec', data)
             .done(function (data) {
@@ -181,13 +181,15 @@ $(document).ready(function () {
                 if (data.result === "error") {
                     $('#alert-wrapper').html(alert_markup('danger', data.message));
                 } else {
-                    $('#alert-wrapper').html('');
-                    $('#rsvp-modal').modal('show');
+                    // TODO: call interactive modal not thank you modal
+                    $('#alert-wrapper').html(alert_markup('success', data.message));
+                    // $('#alert-wrapper').html('');
+                    // $('#rsvp-modal').modal('show');
                 }
             })
             .fail(function (data) {
                 console.log(data);
-                $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There is some issue with the server. '));
+                $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There is some issue with the server. Please try again later.'));
             });
     });
 
