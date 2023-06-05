@@ -172,6 +172,7 @@ $(document).ready(function () {
     $('#rsvp-form').on('submit', function (e) {
         e.preventDefault();
         var data = $(this).serialize();
+        var rsvpName = new FormData(this).get('name')
 
         $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> We are looking up your details.'));
 
@@ -186,7 +187,8 @@ $(document).ready(function () {
                     // $('#alert-wrapper').html('');
                     // $('#rsvp-modal').modal('show');
                     console.log("sending dummy data")
-                    data = { "rsvp": "yes", "diet": "lactose intolerant, allergic to seafood", "email": "abcd@gmail.com" };
+                    data = { "name": rsvpName, "rsvp": "yes", "diet": "lactose intolerant, allergic to seafood", "email": "abcd@gmail.com" };
+                    console.log(data)
                     $.post('https://script.google.com/macros/s/AKfycbxNt0nokofAbTOHcIEnZnHrq_C9yXjzq_wDjbzUx_8Xfc_u9yeRlbivP9rB7Sd5YhsX/exec', data)
                         .done(function (data) { console.log(data) })
                         .fail(function (data) { console.log(data) })

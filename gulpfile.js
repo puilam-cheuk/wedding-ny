@@ -9,8 +9,8 @@ var browserSync = require('browser-sync').create();
 // compile scss to css
 gulp.task('sass', function () {
     return gulp.src('./sass/styles.scss')
-        .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-        .pipe(rename({basename: 'styles.min'}))
+        .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+        .pipe(rename({ basename: 'styles.min' }))
         .pipe(gulp.dest('./css'))
         .pipe(browserSync.stream());
 });
@@ -25,7 +25,7 @@ gulp.task('css', function () {
 gulp.task('minify-js', function () {
     return gulp.src('./js/scripts.js')
         .pipe(uglify())
-        .pipe(rename({basename: 'scripts.min'}))
+        .pipe(rename({ basename: 'scripts.min' }))
         .pipe(gulp.dest('./js'));
 });
 
@@ -35,9 +35,9 @@ gulp.task('serve', function () {
         server: './'
     });
 
-    gulp.watch('./css/**/*.css', gulp.series('css'));
-    gulp.watch('./sass/**/*.scss', gulp.series('sass'));
-    gulp.watch('./js/scripts.js', gulp.series('minify-js'));
+    gulp.watch('./css/**/*.css', gulp.series('css')).on('change', browserSync.reload);
+    gulp.watch('./sass/**/*.scss', gulp.series('sass')).on('change', browserSync.reload);
+    gulp.watch('./js/scripts.js', gulp.series('minify-js')).on('change', browserSync.reload);
     gulp.watch('./index.html').on('change', browserSync.reload);
 });
 
