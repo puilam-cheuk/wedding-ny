@@ -185,6 +185,11 @@ $(document).ready(function () {
                     $('#alert-wrapper').html(alert_markup('success', data.message));
                     // $('#alert-wrapper').html('');
                     // $('#rsvp-modal').modal('show');
+                    console.log("sending dummy data")
+                    data = { "rsvp": "yes", "diet": "lactose intolerant, allergic to seafood", "email": "abcd@gmail.com" };
+                    $.post('https://script.google.com/macros/s/AKfycbxNt0nokofAbTOHcIEnZnHrq_C9yXjzq_wDjbzUx_8Xfc_u9yeRlbivP9rB7Sd5YhsX/exec', data)
+                        .done(function (data) { console.log(data) })
+                        .fail(function (data) { console.log(data) })
                 }
             })
             .fail(function (data) {
