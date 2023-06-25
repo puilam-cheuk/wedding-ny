@@ -145,23 +145,29 @@ $(document).ready(function () {
         },
         data: {
             // Event title
-            title: "Ram and Antara's Wedding",
+            title: "Cheuk and Pui Lam's Banquet | 謝鄭婚宴",
 
             // Event start date
-            start: new Date('Nov 27, 2017 10:00'),
+            start: new Date('Nov 18, 2023 17:00'),
+
+            
+            // Event timezone. Will convert the given time to that zone
+            timezone: 'Asia/Hong_Kong',      
 
             // Event duration (IN MINUTES)
-            // duration: 120,
+            duration: 180,
 
             // You can also choose to set an end time
             // If an end time is set, this will take precedence over duration
-            end: new Date('Nov 29, 2017 00:00'),
+            // end: new Date('Nov 29, 2017 00:00'),
 
             // Event Address
-            address: 'ITC Fortune Park Hotel, Kolkata',
-
+            // address: '75VC+F9 Tsim Sha Tsui, Hong Kong',
+            // address: 'https://goo.gl/maps/PE675c6zty6JSC8x5',
+            address: 'Serenade Chinese Restaurant, 2樓, 尖沙咀梳士巴利道10號香港文化中心大樓1, Tsim Sha Tsui, Hong Kong',
+            
             // Event Description
-            description: "We can't wait to see you on our big day. For any queries or issues, please contact Mr. Amit Roy at +91 9876543210."
+            // description: "We can't wait to see you on our big day."
         }
     });
 
@@ -172,34 +178,44 @@ $(document).ready(function () {
     $('#rsvp-form').on('submit', function (e) {
         e.preventDefault();
         var data = $(this).serialize();
-        var rsvpName = new FormData(this).get('name')
-
+        
         $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> We are looking up your details.'));
 
         $.get('https://script.google.com/macros/s/AKfycbxNt0nokofAbTOHcIEnZnHrq_C9yXjzq_wDjbzUx_8Xfc_u9yeRlbivP9rB7Sd5YhsX/exec', data)
             .done(function (data) {
-                console.log(data);
                 if (data.result === "error") {
                     $('#alert-wrapper').html(alert_markup('danger', data.message));
                 } else {
-                    // TODO: call interactive modal not thank you modal
                     $('#alert-wrapper').html(alert_markup('success', data.message));
-                    // $('#alert-wrapper').html('');
-                    // $('#rsvp-modal').modal('show');
-                    console.log("sending dummy data")
-                    data = { "name": rsvpName, "rsvp": "yes", "diet": "lactose intolerant, allergic to seafood", "email": "abcd@gmail.com" };
-                    console.log(data)
-                    $.post('https://script.google.com/macros/s/AKfycbxNt0nokofAbTOHcIEnZnHrq_C9yXjzq_wDjbzUx_8Xfc_u9yeRlbivP9rB7Sd5YhsX/exec', data)
-                        .done(function (data) { console.log(data) })
-                        .fail(function (data) { console.log(data) })
+                    $('#rsvp-modal').modal('show');
                 }
             })
             .fail(function (data) {
-                console.log(data);
                 $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There is some issue with the server. Please try again later.'));
             });
     });
 
+    /********************** RSVP Submission **********************/
+    $('#rsvp-modal-form').on('submit', function (e) {
+        e.preventDefault();
+        var data = $(this).serialize();
+
+        $('#rsvp-alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> Submitting info.'));
+
+        $.post('https://script.google.com/macros/s/AKfycbxNt0nokofAbTOHcIEnZnHrq_C9yXjzq_wDjbzUx_8Xfc_u9yeRlbivP9rB7Sd5YhsX/exec', data)
+            .done(function (data) {
+                if (data.result === "error") {
+                    $('#rsvp-alert-wrapper').html(alert_markup('danger', data.message));
+                } else {
+                    $('#rsvp-modal-form').modal('hide');
+                    $('#rsvp-modal').modal('hide');
+                    $('#thankyou-modal').modal('show');
+                }
+            })
+            .fail(function (data) {
+                $('#rsvp-alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There is some issue with the server. Please try again later.'));
+            });
+    });
 });
 
 /********************** Extras **********************/
