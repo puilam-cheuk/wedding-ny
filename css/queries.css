@@ -162,12 +162,6 @@
         transition-delay: 0.30s
     }
 
-    .intro-content {
-        display: inline-block;
-        width: 75%;
-        margin-bottom: 30px;
-    }
-
     .last {
         margin: 0;
     }
