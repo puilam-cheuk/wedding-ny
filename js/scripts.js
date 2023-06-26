@@ -199,6 +199,7 @@ $(document).ready(function () {
     $('#rsvp-modal-form').on('submit', function (e) {
         e.preventDefault();
         var data = $(this).serialize();
+        var rsvp = data.match(/rsvp=(.)/)[1];
 
         $('#rsvp-alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> Submitting info.'));
 
@@ -207,9 +208,20 @@ $(document).ready(function () {
                 if (data.result === "error") {
                     $('#rsvp-alert-wrapper').html(alert_markup('danger', data.message));
                 } else {
+                    $('#rsvp-alert-wrapper').html('');
+                    $('#alert-wrapper').html('');
+
                     $('#rsvp-modal-form').modal('hide');
                     $('#rsvp-modal').modal('hide');
-                    $('#thankyou-modal').modal('show');
+
+                    if (rsvp === 'Y') {
+                        $('#thankyou-modal').modal('show');
+                    } else if (rsvp === 'N') {
+                        $('#missyou-modal').modal('show');
+                    } else {
+                        console.log('How did you get here');
+                        $('#rsvp-alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There may have been an issue. Please try again later.'));
+                    }
                 }
             })
             .fail(function (data) {
