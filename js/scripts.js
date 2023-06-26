@@ -178,7 +178,8 @@ $(document).ready(function () {
     $('#rsvp-form').on('submit', function (e) {
         e.preventDefault();
         var data = $(this).serialize();
-        
+        var name = data.match(/name=(.*)/)[1];
+
         $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> We are looking up your details.'));
 
         $.get('https://script.google.com/macros/s/AKfycbxNt0nokofAbTOHcIEnZnHrq_C9yXjzq_wDjbzUx_8Xfc_u9yeRlbivP9rB7Sd5YhsX/exec', data)
@@ -187,6 +188,8 @@ $(document).ready(function () {
                     $('#alert-wrapper').html(alert_markup('danger', data.message));
                 } else {
                     $('#alert-wrapper').html(alert_markup('success', data.message));
+                    $('#rsvp-guest').html(readonly_name(name, data.rowIdx));
+                    
                     $('#rsvp-modal').modal('show');
                 }
             })
@@ -195,12 +198,20 @@ $(document).ready(function () {
             });
     });
 
+    /********************** RSVP Modal **********************/
+    $('#rsvp-modal').on('hide.bs.modal', function (e) {
+        $('#alert-wrapper').html('');
+    });
+    
     /********************** RSVP Submission **********************/
     $('#rsvp-modal-form').on('submit', function (e) {
         e.preventDefault();
         var data = $(this).serialize();
         var rsvp = data.match(/rsvp=(.)/)[1];
 
+        var name = $(this).find("input[name='name']").val();
+        data = data + '&name=' + name;
+        
         $('#rsvp-alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> Submitting info.'));
 
         $.post('https://script.google.com/macros/s/AKfycbxNt0nokofAbTOHcIEnZnHrq_C9yXjzq_wDjbzUx_8Xfc_u9yeRlbivP9rB7Sd5YhsX/exec', data)
@@ -264,6 +275,11 @@ function initBBSRMap() {
 // alert_markup
 function alert_markup(alert_type, msg) {
     return '<div class="alert alert-' + alert_type + '" role="alert">' + msg + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span>&times;</span></button></div>';
+}
+
+// inject readonly name
+function readonly_name(name, rowIdx) {
+    return '<div id="rsvp-guest"><div class="col-md-12 col-sm-12"><div class="form-input-group"><i class="fa fa-user"></i><input name="name" type="text" class="" value=' + name + ' required readonly disabled><input name="rowIdx" type="text" class="" value=' + rowIdx + ' readonly hidden></div></div></div>'
 }
 
 // MD5 Encoding
