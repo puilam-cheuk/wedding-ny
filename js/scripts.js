@@ -178,8 +178,8 @@ $(document).ready(function () {
     $('#rsvp-form').on('submit', function (e) {
         e.preventDefault();
         var data = $(this).serialize();
-        var name = decodeURIComponent(data.match(/name=(.*)/)[1]);
-        // var name = new FormData(this).get('name');
+        // var name = decodeURIComponent(data.match(/name=(.*)/)[1]);
+        var name = new FormData(this).get('name');
 
         $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> We are looking up your details.'));
 
@@ -189,6 +189,7 @@ $(document).ready(function () {
                     $('#alert-wrapper').html(alert_markup('danger', data.message));
                 } else {
                     $('#alert-wrapper').html(alert_markup('success', data.message));
+                    $('#rsvp-lastUpdated').html(update_lastUpdated(data.last_updated));
                     $('#rsvp-guest').html(readonly_name(name, data.rowIdx));
                     
                     $('#rsvp-modal').modal('show');
@@ -278,9 +279,14 @@ function alert_markup(alert_type, msg) {
     return '<div class="alert alert-' + alert_type + '" role="alert">' + msg + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span>&times;</span></button></div>';
 }
 
+// inject last updated time
+function update_lastUpdated(lastUpdated) {
+    return '<div class="col-md-12 col-sm-12 text-right">' + 'Last updated: ' + lastUpdated + '</div><p></p>';
+}
+
 // inject readonly name
 function readonly_name(name, rowIdx) {
-    return '<div id="rsvp-guest"><div class="col-md-12 col-sm-12"><div class="form-input-group"><i class="fa fa-user"></i><input name="name" type="text" class="" value=' + name + ' required readonly disabled><input name="rowIdx" type="text" class="" value=' + rowIdx + ' readonly hidden></div></div></div>'
+    return '<div class="col-md-12 col-sm-12"><div class="form-input-group"><i class="fa fa-user"></i><input name="name" type="text" class="" value="' + name + '" required readonly disabled><input name="rowIdx" type="text" class="" value=' + rowIdx + ' readonly hidden></div></div>';
 }
 
 // MD5 Encoding
