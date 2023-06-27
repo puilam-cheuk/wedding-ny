@@ -178,7 +178,8 @@ $(document).ready(function () {
     $('#rsvp-form').on('submit', function (e) {
         e.preventDefault();
         var data = $(this).serialize();
-        var name = data.match(/name=(.*)/)[1];
+        var name = decodeURIComponent(data.match(/name=(.*)/)[1]);
+        // var name = new FormData(this).get('name');
 
         $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> We are looking up your details.'));
 
@@ -210,7 +211,7 @@ $(document).ready(function () {
         var rsvp = data.match(/rsvp=(.)/)[1];
 
         var name = $(this).find("input[name='name']").val();
-        data = data + '&name=' + name;
+        data = data + '&name=' + encodeURIComponent(name);
         
         $('#rsvp-alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> Submitting info.'));
 
