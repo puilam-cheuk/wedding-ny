@@ -189,7 +189,10 @@ $(document).ready(function () {
                     $('#alert-wrapper').html(alert_markup('danger', data.message));
                 } else {
                     $('#alert-wrapper').html(alert_markup('success', data.message));
-                    $('#rsvp-lastUpdated').html(update_lastUpdated(data.last_updated));
+                    if (data.last_updated) {
+                        $('#rsvp-lastUpdated').html(update_lastUpdated(data.last_updated));
+                    }
+                    $('#rsvp-count').html(update_rsvpCount(1));
                     $('#rsvp-guest').html(readonly_name(name, data.rowIdx));
                     
                     $('#rsvp-modal').modal('show');
@@ -277,6 +280,11 @@ function initBBSRMap() {
 // alert_markup
 function alert_markup(alert_type, msg) {
     return '<div class="alert alert-' + alert_type + '" role="alert">' + msg + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span>&times;</span></button></div>';
+}
+
+// inject rsvp ccount
+function update_rsvpCount(rsvpCount) {
+    return '<div class="col-md-12 col-sm-12 text-left">' + 'We have reserved <b>' + rsvpCount + '</b> seat in your honor.' + '</div><p></p>';
 }
 
 // inject last updated time
