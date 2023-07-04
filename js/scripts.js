@@ -194,8 +194,6 @@ $(document).ready(function () {
                     }
                     $('#rsvp-maxSize').html(update_maxSize(1));
                     $('#rsvp-guest').html(readonly_name(data.name, data.rowIdx));
-                    $('#rsvp-email').html(prefill_email(data.email));
-                    $('#rsvp-diet').html(prefill_diet(data.diet));
                     
                     $('#rsvp-modal').modal('show');
                 }
@@ -207,6 +205,7 @@ $(document).ready(function () {
 
     /********************** RSVP Modal **********************/
     $('#rsvp-modal').on('hide.bs.modal', function (e) {
+        $('#rsvp-modal-form').trigger('reset');
         $('#alert-wrapper').html('');
     });
     
@@ -297,24 +296,6 @@ function update_lastUpdated(lastUpdated) {
 // inject readonly name
 function readonly_name(name, rowIdx) {
     return '<div class="col-md-12 col-sm-12"><div class="form-input-group"><i class="fa fa-user"></i><input name="name" type="text" class="" value="' + name + '" required readonly disabled><input name="rowIdx" type="text" class="" value=' + rowIdx + ' readonly hidden></div></div>';
-}
-
-// inject email (prefilled if pre-existing)
-function prefill_email(email) {
-    var input = '<input name="email" type="email" class="" placeholder="E-mail">';
-    if (email) {
-        input = '<input name="email" type="email" class="" value="' + email + '">';
-    }
-    return '<div class="col-md-12 col-sm-12"><div class="form-input-group"><i class="fa fa-envelope"></i>' + input + '</div></div>';
-}
-
-// inject dietary restrictions (prefilled if pre-existing)
-function prefill_diet(diet) {
-    var input = '<input name="diet" type="text" class="" placeholder="Dietary restrictions">';
-    if (diet) {
-        input = '<input name="diet" type="text" class="" value="' + diet + '">';
-    }
-    return '<div class="col-md-12 col-sm-12"><div class="form-input-group"><i class="fa fa-cutlery"></i>' + input + '</div></div>';
 }
 
 // MD5 Encoding
