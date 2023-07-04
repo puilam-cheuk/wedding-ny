@@ -179,7 +179,7 @@ $(document).ready(function () {
         e.preventDefault();
         var data = $(this).serialize();
         // var name = decodeURIComponent(data.match(/name=(.*)/)[1]);
-        var name = new FormData(this).get('name');
+        // var name = new FormData(this).get('name');
 
         $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> We are looking up your details.'));
 
@@ -192,8 +192,10 @@ $(document).ready(function () {
                     if (data.last_updated) {
                         $('#rsvp-lastUpdated').html(update_lastUpdated(data.last_updated));
                     }
-                    $('#rsvp-count').html(update_rsvpCount(1));
-                    $('#rsvp-guest').html(readonly_name(name, data.rowIdx));
+                    $('#rsvp-maxSize').html(update_maxSize(1));
+                    $('#rsvp-guest').html(readonly_name(data.name, data.rowIdx));
+                    $('#rsvp-email').html(prefill_email(data.email));
+                    $('#rsvp-diet').html(prefill_diet(data.diet));
                     
                     $('#rsvp-modal').modal('show');
                 }
@@ -228,7 +230,6 @@ $(document).ready(function () {
                     $('#alert-wrapper').html('');
 
                     $('#rsvp-modal-form').modal('hide');
-                    $('#rsvp-modal-form').trigger('reset');
                     $('#rsvp-modal').modal('hide');
 
                     if (rsvp === 'Y') {
@@ -284,8 +285,8 @@ function alert_markup(alert_type, msg) {
 }
 
 // inject rsvp ccount
-function update_rsvpCount(rsvpCount) {
-    return '<div class="col-md-12 col-sm-12 text-left">' + 'We have reserved <b>' + rsvpCount + '</b> seat in your honor.' + '</div><p></p>';
+function update_maxSize(rsvpMaxSize) {
+    return '<div class="col-md-12 col-sm-12 text-left">' + 'We have reserved <b>' + rsvpMaxSize + '</b> seat in your honor.' + '</div><p></p>';
 }
 
 // inject last updated time
@@ -296,6 +297,24 @@ function update_lastUpdated(lastUpdated) {
 // inject readonly name
 function readonly_name(name, rowIdx) {
     return '<div class="col-md-12 col-sm-12"><div class="form-input-group"><i class="fa fa-user"></i><input name="name" type="text" class="" value="' + name + '" required readonly disabled><input name="rowIdx" type="text" class="" value=' + rowIdx + ' readonly hidden></div></div>';
+}
+
+// inject email (prefilled if pre-existing)
+function prefill_email(email) {
+    var input = '<input name="email" type="email" class="" placeholder="E-mail">';
+    if (email) {
+        input = '<input name="email" type="email" class="" value="' + email + '">';
+    }
+    return '<div class="col-md-12 col-sm-12"><div class="form-input-group"><i class="fa fa-envelope"></i>' + input + '</div></div>';
+}
+
+// inject dietary restrictions (prefilled if pre-existing)
+function prefill_diet(diet) {
+    var input = '<input name="diet" type="text" class="" placeholder="Dietary restrictions">';
+    if (diet) {
+        input = '<input name="diet" type="text" class="" value="' + diet + '">';
+    }
+    return '<div class="col-md-12 col-sm-12"><div class="form-input-group"><i class="fa fa-cutlery"></i>' + input + '</div></div>';
 }
 
 // MD5 Encoding
