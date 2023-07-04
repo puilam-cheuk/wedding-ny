@@ -193,7 +193,7 @@ $(document).ready(function () {
                         $('#rsvp-lastUpdated').html(update_lastUpdated(data.last_updated));
                     }
                     $('#rsvp-maxSize').html(update_maxSize(1));
-                    $('#rsvp-guest').html(readonly_name(data.name, data.rowIdx));
+                    $('#rsvp-guest').html(readonly_name(data.printed_name, data.rowIdx));
                     
                     $('#rsvp-modal').modal('show');
                 }
