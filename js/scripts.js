@@ -179,7 +179,7 @@ $(document).ready(function () {
         e.preventDefault();
         var data = $(this).serialize();
         // var name = decodeURIComponent(data.match(/name=(.*)/)[1]);
-        // var name = new FormData(this).get('name');
+        var name = new FormData(this).get('name');
 
         $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> We are looking up your details.'));
 
@@ -189,11 +189,13 @@ $(document).ready(function () {
                     $('#alert-wrapper').html(alert_markup('danger', data.message));
                 } else {
                     $('#alert-wrapper').html(alert_markup('success', data.message));
+                    
                     if (data.last_updated) {
                         $('#rsvp-lastUpdated').html(update_lastUpdated(data.last_updated));
                     }
                     $('#rsvp-maxSize').html(update_maxSize(1));
-                    $('#rsvp-guest').html(readonly_name(data.printed_name, data.rowIdx));
+                    var printed_name = data.group_list.split(',')[0] || name;
+                    $('#rsvp-guest').html(readonly_name(printed_name, data.rowIdx));
                     
                     $('#rsvp-modal').modal('show');
                 }
