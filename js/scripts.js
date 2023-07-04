@@ -227,7 +227,8 @@ $(document).ready(function () {
                     $('#rsvp-alert-wrapper').html('');
                     $('#alert-wrapper').html('');
 
-                    $('#rsvp-modal-form').modal('hide'); // TODO: reset form/clear fields?
+                    $('#rsvp-modal-form').modal('hide');
+                    $('#rsvp-modal-form').trigger('reset');
                     $('#rsvp-modal').modal('hide');
 
                     if (rsvp === 'Y') {
