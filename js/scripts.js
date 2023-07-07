@@ -189,14 +189,37 @@ $(document).ready(function () {
                     $('#alert-wrapper').html(alert_markup('danger', data.message));
                 } else {
                     $('#alert-wrapper').html(alert_markup('success', data.message));
-                    
+
                     if (data.last_updated) {
                         $('#rsvp-lastUpdated').html(update_lastUpdated(data.last_updated));
                     }
-                    $('#rsvp-maxSize').html(update_maxSize(1));
-                    var printed_name = data.group_list.split(',')[0] || name;
-                    $('#rsvp-guest').html(readonly_name(printed_name, data.rowIdx));
-                    
+                    $('#rsvp-maxSize').html(update_maxSize(data.max_size));
+
+                    var group_list = data.group_list.split(',');
+                    var guest_name = data.display_name || name;
+                    var rowIdx = data.rowIdx;
+                    var idx = 0;
+
+                    // this is so that the searcher's name comes up first in the cards
+                    $('#rsvp-group').append(create_individual_card(idx));
+                    $('#rsvp-name-' + idx).html(create_name_field(guest_name, rowIdx, idx));
+                    $('#rsvp-email-' + idx).html(create_email_input(idx));
+                    $('#rsvp-diet-' + idx).html(create_diet_input(idx));
+                    $('#rsvp-response-' + idx).html(create_rsvp_response_input(idx));
+
+                    for (j = 0; j < data.max_size; j++) {
+                        guest_name = group_list[j].trim();
+                        rowIdx = undefined;
+
+                        if (guest_name !== data.display_name) {
+                            idx = idx + 1;
+                            $('#rsvp-group').append(create_individual_card(idx));
+                            $('#rsvp-name-' + idx).html(create_name_field(guest_name, rowIdx, idx));
+                            $('#rsvp-email-' + idx).html(create_email_input(idx));
+                            $('#rsvp-diet-' + idx).html(create_diet_input(idx));
+                            $('#rsvp-response-' + idx).html(create_rsvp_response_input(idx));
+                        }
+                    }
                     $('#rsvp-modal').modal('show');
                 }
             })
@@ -208,6 +231,9 @@ $(document).ready(function () {
     /********************** RSVP Modal **********************/
     $('#rsvp-modal').on('hide.bs.modal', function (e) {
         $('#rsvp-modal-form').trigger('reset');
+        $('#rsvp-lastUpdated').html('');
+        $('#rsvp-group').html('');
+        $('#rsvp-alert-wrapper').html('');
         $('#alert-wrapper').html('');
     });
     
@@ -215,11 +241,16 @@ $(document).ready(function () {
     $('#rsvp-modal-form').on('submit', function (e) {
         e.preventDefault();
         var data = $(this).serialize();
-        var rsvp = data.match(/rsvp=(.)/)[1];
 
-        var name = $(this).find("input[name='name']").val();
-        data = data + '&name=' + encodeURIComponent(name);
-        
+        var allRSVPs = data.match(/rsvp-[\d]=(.)/g);
+        var rsvpY = false;
+        allRSVPs.forEach(function(rsvp) {
+            if (rsvp.slice(-1) === 'Y') {
+                rsvpY = true;
+            }
+            return;
+        });
+
         $('#rsvp-alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> Submitting info.'));
 
         $.post('https://script.google.com/macros/s/AKfycbxNt0nokofAbTOHcIEnZnHrq_C9yXjzq_wDjbzUx_8Xfc_u9yeRlbivP9rB7Sd5YhsX/exec', data)
@@ -227,19 +258,13 @@ $(document).ready(function () {
                 if (data.result === "error") {
                     $('#rsvp-alert-wrapper').html(alert_markup('danger', data.message));
                 } else {
-                    $('#rsvp-alert-wrapper').html('');
-                    $('#alert-wrapper').html('');
-
                     $('#rsvp-modal-form').modal('hide');
                     $('#rsvp-modal').modal('hide');
 
-                    if (rsvp === 'Y') {
+                    if (rsvpY) {
                         $('#thankyou-modal').modal('show');
-                    } else if (rsvp === 'N') {
-                        $('#missyou-modal').modal('show');
                     } else {
-                        console.log('How did you get here');
-                        $('#rsvp-alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There may have been an issue. Please try again later.'));
+                        $('#missyou-modal').modal('show');
                     }
                 }
             })
@@ -287,7 +312,7 @@ function alert_markup(alert_type, msg) {
 
 // inject rsvp ccount
 function update_maxSize(rsvpMaxSize) {
-    return '<div class="col-md-12 col-sm-12 text-left">' + 'We have reserved <b>' + rsvpMaxSize + '</b> seat in your honor.' + '</div><p></p>';
+    return '<div class="col-md-12 col-sm-12 text-left">' + 'We have reserved <b>' + rsvpMaxSize + '</b> seat(s) in your honor.' + '</div><p></p>';
 }
 
 // inject last updated time
@@ -295,9 +320,32 @@ function update_lastUpdated(lastUpdated) {
     return '<div class="col-md-12 col-sm-12 text-right">' + 'Last updated: ' + lastUpdated + '</div><p></p>';
 }
 
-// inject readonly name
-function readonly_name(name, rowIdx) {
-    return '<div class="col-md-12 col-sm-12"><div class="form-input-group"><i class="fa fa-user"></i><input name="name" type="text" class="" value="' + name + '" required readonly disabled><input name="rowIdx" type="text" class="" value=' + rowIdx + ' readonly hidden></div></div>';
+// inject last updated time
+function create_individual_card(idx) {
+    return '<hr><div id="rsvp-guest-' + idx + '"><div class="row"><div id="rsvp-name-' + idx + '"></div></div><div class="row"><div id="rsvp-email-' + idx + '"></div></div><div class="row"><div id="rsvp-diet-' + idx + '"></div></div><div class="row section-padding"><div id="rsvp-response-' + idx + '"></div></div></div>';
+}
+
+// inject name field. if it starts with a '!' this indicates the name should be left blank to be filled out. otherwise, it will be a readonly name field.
+function create_name_field(name, rowIdx, idx) {
+    if (name.startsWith('!')) {
+        return '<div class="col-md-12 col-sm-12"><div class="form-input-group"><i class="fa fa-user"></i><input name="fill_name-' + idx + '" type="text" class="" required placeholder="Name"><input name="rowIdx-' + idx + '" type="text" class="" value=' + rowIdx + ' readonly hidden><input name="name-' + idx + '" type="text" class="" value="' + name + '" readonly hidden></div></div>';
+    }
+    return '<div class="col-md-12 col-sm-12"><div class="form-input-group"><i class="fa fa-user"></i><input name="display_name-' + idx + '" type="text" class="" value="' + name + '" required readonly disabled><input name="rowIdx-' + idx + '" type="text" class="" value=' + rowIdx + ' readonly hidden><input name="name-' + idx + '" type="text" class="" value="' + name + '" readonly hidden></div></div>';
+}
+
+// create email input
+function create_email_input(idx) {
+    return '<div class="col-md-12 col-sm-12"><div class="form-input-group"><i class="fa fa-envelope"></i><input name="email-' + idx + '" type="email" class="" placeholder="E-mail"></div></div>';
+}
+
+// create dietary restrictions input
+function create_diet_input(idx) {
+    return '<div class="col-md-12 col-sm-12"><div class="form-input-group"><i class="fa fa-cutlery"></i><input name="diet-' + idx + '" type="text" class="" placeholder="Dietary restrictions"></div></div>';
+}
+
+// create dietary restrictions input
+function create_rsvp_response_input(idx) {
+    return '<label class="radio-inline"><input type="radio" id="rsvp-response-accept" name="rsvp-' + idx + '" value="Y" required>Accept</label><label class="radio-inline"><input type="radio" id="rsvp-response-decline" name="rsvp-' + idx + '" value="N" required>Decline</label>';
 }
 
 // MD5 Encoding

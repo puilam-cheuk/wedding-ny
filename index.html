@@ -453,7 +453,6 @@
                             <br>
                             <div class="section-padding">
                                 <form id="rsvp-modal-form" class="rsvp-form" action="" method="POST">
-                                    <!-- TODO: update submission form -->
                                     <div class="row">
                                         <div id="rsvp-lastUpdated">
                                             <!-- scripts.js will inject the last updated here -->
@@ -464,38 +463,8 @@
                                             <!-- scripts.js will inject the rsvp max size here -->
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div id="rsvp-guest">
-                                            <!-- scripts.js will inject the guest name here -->
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div id="rsvp-email">
-                                            <div class="col-md-12 col-sm-12">
-                                                <div class="form-input-group">
-                                                    <i class="fa fa-envelope"></i><input name="email" type="email" class="" placeholder="E-mail">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div id="rsvp-diet">
-                                            <div class="col-md-12 col-sm-12">
-                                                <div class="form-input-group">
-                                                    <i class="fa fa-cutlery"></i><input name="diet" type="text" class="" placeholder="Dietary restrictions">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row section-padding">
-                                        <div id="rsvp-response">
-                                            <label class="radio-inline">
-                                                <input type="radio" id="rsvp-response-accept" name="rsvp" value="Y" required>Accept
-                                            </label>
-                                            <label class="radio-inline">
-                                                <input type="radio" id="rsvp-response-decline" name="rsvp" value="N" required>Decline
-                                            </label>
-                                        </div>
+                                    <div id="rsvp-group">
+                                        <!-- scripts.js will inject rsvp cards for each guest here -->
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12" id="rsvp-alert-wrapper"></div>
