@@ -310,14 +310,16 @@ function alert_markup(alert_type, msg) {
     return '<div class="alert alert-' + alert_type + '" role="alert">' + msg + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span>&times;</span></button></div>';
 }
 
-// inject rsvp ccount
-function update_maxSize(rsvpMaxSize) {
-    return '<div class="col-md-12 col-sm-12 text-left">' + 'We have reserved <b>' + rsvpMaxSize + '</b> seat(s) in your honor.' + '</div><p></p>';
-}
-
 // inject last updated time
 function update_lastUpdated(lastUpdated) {
-    return '<div class="col-md-12 col-sm-12 text-right">' + 'Last updated: ' + lastUpdated + '</div><p></p>';
+    var options = { dateStyle: 'medium', timeStyle: 'short' };
+    var lastUpdated_JSDate = new Date(lastUpdated);
+    return '<div class="col-md-12 col-sm-12 text-right">' + 'Last updated: ' + lastUpdated_JSDate.toLocaleString('en-US', options) + '</div>' + '<div class="col-md-12 col-sm-12 text-right">' + 'Last updated: ' + lastUpdated_JSDate.toLocaleString('zh-HK', options) + '</div><p></p>';
+}
+
+// inject rsvp ccount
+function update_maxSize(rsvpMaxSize) {
+    return '<div class="col-md-12 col-sm-12 text-left">' + 'We have reserved <b>' + rsvpMaxSize + '</b> seat(s) in your honor.' + '</div>';
 }
 
 // inject last updated time
