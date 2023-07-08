@@ -150,9 +150,9 @@ $(document).ready(function () {
             // Event start date
             start: new Date('Nov 18, 2023 17:00'),
 
-            
+
             // Event timezone. Will convert the given time to that zone
-            timezone: 'Asia/Hong_Kong',      
+            timezone: 'Asia/Hong_Kong',
 
             // Event duration (IN MINUTES)
             duration: 180,
@@ -165,7 +165,7 @@ $(document).ready(function () {
             // address: '75VC+F9 Tsim Sha Tsui, Hong Kong',
             // address: 'https://goo.gl/maps/PE675c6zty6JSC8x5',
             address: 'Serenade Chinese Restaurant, 2樓, 尖沙咀梳士巴利道10號香港文化中心大樓1, Tsim Sha Tsui, Hong Kong',
-            
+
             // Event Description
             // description: "We can't wait to see you on our big day."
         }
@@ -181,14 +181,22 @@ $(document).ready(function () {
         // var name = decodeURIComponent(data.match(/name=(.*)/)[1]);
         var name = new FormData(this).get('name');
 
-        $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> We are looking up your details.'));
+        $('#alert-wrapper').html(
+            alert_markup(
+                'info',
+                '<strong>Please wait!</strong> We are looking up your details.'
+                + '</br>'
+                + '<strong>稍等片刻!</strong> 我們正在查找您的資料。'
+            )
+        );
 
         $.get('https://script.google.com/macros/s/AKfycbxNt0nokofAbTOHcIEnZnHrq_C9yXjzq_wDjbzUx_8Xfc_u9yeRlbivP9rB7Sd5YhsX/exec', data)
             .done(function (data) {
+                var msg = data.en_message + '</br>' + data.ch_message;
                 if (data.result === "error") {
-                    $('#alert-wrapper').html(alert_markup('danger', data.message));
+                    $('#alert-wrapper').html(alert_markup('danger', msg));
                 } else {
-                    $('#alert-wrapper').html(alert_markup('success', data.message));
+                    $('#alert-wrapper').html(alert_markup('success', msg));
 
                     if (data.last_updated) {
                         $('#rsvp-lastUpdated').html(update_lastUpdated(data.last_updated));
@@ -224,7 +232,14 @@ $(document).ready(function () {
                 }
             })
             .fail(function (data) {
-                $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There is some issue with the server. Please try again later.'));
+                $('#alert-wrapper').html(
+                    alert_markup(
+                        'danger',
+                        '<strong>Sorry!</strong> There is some issue with the server. Please try again later.'
+                        + '</br>'
+                        + '<strong>對不起!</strong> 服務器出現問題，請稍後再試。'
+                    )
+                );
             });
     });
 
@@ -236,7 +251,7 @@ $(document).ready(function () {
         $('#rsvp-alert-wrapper').html('');
         $('#alert-wrapper').html('');
     });
-    
+
     /********************** RSVP Submission **********************/
     $('#rsvp-modal-form').on('submit', function (e) {
         e.preventDefault();
@@ -244,14 +259,21 @@ $(document).ready(function () {
 
         var allRSVPs = data.match(/rsvp-[\d]=(.)/g);
         var rsvpY = false;
-        allRSVPs.forEach(function(rsvp) {
+        allRSVPs.forEach(function (rsvp) {
             if (rsvp.slice(-1) === 'Y') {
                 rsvpY = true;
             }
             return;
         });
 
-        $('#rsvp-alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> Submitting info.'));
+        $('#rsvp-alert-wrapper').html(
+            alert_markup(
+                'info',
+                '<strong>Please wait!</strong> Submitting info.'
+                + '</br>'
+                + '<strong>稍等片刻!</strong> 正在提交信息。'
+            )
+        );
 
         $.post('https://script.google.com/macros/s/AKfycbxNt0nokofAbTOHcIEnZnHrq_C9yXjzq_wDjbzUx_8Xfc_u9yeRlbivP9rB7Sd5YhsX/exec', data)
             .done(function (data) {
@@ -269,7 +291,14 @@ $(document).ready(function () {
                 }
             })
             .fail(function (data) {
-                $('#rsvp-alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There is some issue with the server. Please try again later.'));
+                $('#alert-wrapper').html(
+                    alert_markup(
+                        'danger',
+                        '<strong>Sorry!</strong> There is some issue with the server. Please try again later.'
+                        + '</br>'
+                        + '<strong>對不起!</strong> 服務器出現問題，請稍後再試。'
+                    )
+                );
             });
     });
 });
@@ -312,42 +341,83 @@ function alert_markup(alert_type, msg) {
 
 // inject last updated time
 function update_lastUpdated(lastUpdated) {
-    var options = { dateStyle: 'medium', timeStyle: 'short' };
     var lastUpdated_JSDate = new Date(lastUpdated);
-    return '<div class="col-md-12 col-sm-12 text-right">' + 'Last updated: ' + lastUpdated_JSDate.toLocaleString('en-US', options) + '</div>' + '<div class="col-md-12 col-sm-12 text-right">' + 'Last updated: ' + lastUpdated_JSDate.toLocaleString('zh-HK', options) + '</div><p></p>';
+    var options = { dateStyle: 'medium', timeStyle: 'short' };
+    return '<div class="col-md-12 col-sm-12 text-right">'
+        + 'Last updated: ' + lastUpdated_JSDate.toLocaleString('en-US', options)
+        + '</div>'
+        + '<div class="col-md-12 col-sm-12 text-right">'
+        + '最後更新: ' + lastUpdated_JSDate.toLocaleString('zh-HK', options)
+        + '</div>'
+        + '<p></p>';
 }
 
 // inject rsvp ccount
 function update_maxSize(rsvpMaxSize) {
-    return '<div class="col-md-12 col-sm-12 text-left">' + 'We have reserved <b>' + rsvpMaxSize + '</b> seat(s) in your honor.' + '</div>';
+    return '<div class="col-md-12 col-sm-12 text-left">'
+        + 'We have reserved <b>' + rsvpMaxSize + '</b> seat(s) in your honor.'
+        + '</div>'
+        + '<div class="col-md-12 col-sm-12 text-left">'
+        + '我們為您保留了<b>' + rsvpMaxSize + '</b>個席位。'
+        + '</div>';
 }
 
 // inject last updated time
 function create_individual_card(idx) {
-    return '<hr><div id="rsvp-guest-' + idx + '"><div class="row"><div id="rsvp-name-' + idx + '"></div></div><div class="row"><div id="rsvp-email-' + idx + '"></div></div><div class="row"><div id="rsvp-diet-' + idx + '"></div></div><div class="row section-padding"><div id="rsvp-response-' + idx + '"></div></div></div>';
+    return '<hr>'
+        + '<div id="rsvp-guest-' + idx + '">'
+        + '<div class="row"><div id="rsvp-name-' + idx + '"></div></div>'
+        + '<div class="row"><div id="rsvp-email-' + idx + '"></div></div>'
+        + '<div class="row"><div id="rsvp-diet-' + idx + '"></div></div>'
+        + '<div class="row section-padding"><div id="rsvp-response-' + idx + '"></div></div>'
+        + '</div>';
 }
 
 // inject name field. if it starts with a '!' this indicates the name should be left blank to be filled out. otherwise, it will be a readonly name field.
 function create_name_field(name, rowIdx, idx) {
+    var displayOrFillInput = '';
     if (name.startsWith('!')) {
-        return '<div class="col-md-12 col-sm-12"><div class="form-input-group"><i class="fa fa-user"></i><input name="fill_name-' + idx + '" type="text" class="" required placeholder="Name"><input name="rowIdx-' + idx + '" type="text" class="" value=' + rowIdx + ' readonly hidden><input name="name-' + idx + '" type="text" class="" value="' + name + '" readonly hidden></div></div>';
+        var customErrMsg = "'Please fill out the name. | 請填寫姓名。'";
+        displayOrFillInput = '<input name="fill_name-' + idx + '" type="text" class="" required placeholder="Name | 姓名" oninvalid="this.setCustomValidity(' + customErrMsg + ')" oninput="this.setCustomValidity(\'\')">';
+    } else {
+        displayOrFillInput = '<input name="display_name-' + idx + '" type="text" class="" value="' + name + '" required readonly disabled>';
     }
-    return '<div class="col-md-12 col-sm-12"><div class="form-input-group"><i class="fa fa-user"></i><input name="display_name-' + idx + '" type="text" class="" value="' + name + '" required readonly disabled><input name="rowIdx-' + idx + '" type="text" class="" value=' + rowIdx + ' readonly hidden><input name="name-' + idx + '" type="text" class="" value="' + name + '" readonly hidden></div></div>';
+    return '<div class="col-md-12 col-sm-12">'
+        + '<div class="form-input-group">'
+        + '<i class="fa fa-user"></i>'
+        + displayOrFillInput
+        + '<input name="rowIdx-' + idx + '" type="text" class="" value=' + rowIdx + ' readonly hidden>'
+        + '<input name="name-' + idx + '" type="text" class="" value="' + name + '" readonly hidden>'
+        + '</div>'
+        + '</div>';
 }
 
 // create email input
 function create_email_input(idx) {
-    return '<div class="col-md-12 col-sm-12"><div class="form-input-group"><i class="fa fa-envelope"></i><input name="email-' + idx + '" type="email" class="" placeholder="E-mail"></div></div>';
+    return '<div class="col-md-12 col-sm-12">'
+        + '<div class="form-input-group">'
+        + '<i class="fa fa-envelope"></i>'
+        + '<input name="email-' + idx + '" type="email" class="" placeholder="E-mail | 電郵" autocomplete="email">'
+        + '</div>'
+        + '</div>';
 }
 
 // create dietary restrictions input
 function create_diet_input(idx) {
-    return '<div class="col-md-12 col-sm-12"><div class="form-input-group"><i class="fa fa-cutlery"></i><input name="diet-' + idx + '" type="text" class="" placeholder="Dietary restrictions"></div></div>';
+    return '<div class="col-md-12 col-sm-12">'
+        + '<div class="form-input-group">'
+        + '<i class="fa fa-cutlery"></i>'
+        + '<input name="diet-' + idx + '" type="text" class="" placeholder="Dietary restrictions | 飲食限制">'
+        + '</div>'
+        + '</div>';
 }
 
 // create dietary restrictions input
 function create_rsvp_response_input(idx) {
-    return '<label class="radio-inline"><input type="radio" id="rsvp-response-accept" name="rsvp-' + idx + '" value="Y" required>Accept</label><label class="radio-inline"><input type="radio" id="rsvp-response-decline" name="rsvp-' + idx + '" value="N" required>Decline</label>';
+    var customErrMsg = "'Please choose to accept or decline. | 請選擇接受或拒絕。'";
+    var clickHandler = "this.form[ this.name ][0].setCustomValidity('')";
+    return '<label class="radio-inline"><input type="radio" id="rsvp-response-accept-' + idx + '" name="rsvp-' + idx + '" value="Y" required oninvalid="setCustomValidity(' + customErrMsg + ')" onclick="setCustomValidity(\'\')">Accept | 接受</label>'
+        + '<label class="radio-inline"><input type="radio" id="rsvp-response-decline-' + idx + '" name="rsvp-' + idx + '" value="N" required onclick="' + clickHandler + '">Decline | 拒絕</label>';
 }
 
 // MD5 Encoding

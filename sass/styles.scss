@@ -895,3 +895,11 @@ body.modal-open {
   max-height: 60vh;
   overflow-y: auto;
 }
+
+.radio-inline+.radio-inline {
+  margin-left: 35px;
+}
+
+.alert .close {
+  line-height: 0.1;
+}

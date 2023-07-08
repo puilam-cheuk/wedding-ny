@@ -393,7 +393,10 @@
                         </button>
                         <div class="section-padding">
                             <h3>Thank you!</h3>
-                            <p>We are glad to see you join us on our big day. See you soon!</p>
+                            <h3 class="chinese-font">非常感谢!</h3>
+                            <p class="no-padding no-margin">We are glad to see you join us on our big day. See you soon!
+                            </p>
+                            <p class="chinese-font">很高興您能参加我們的大日子。 到時候見！</p>
                             <div id="add-to-cal"></div>
                         </div>
                     </div>
@@ -410,7 +413,10 @@
                         </button>
                         <div class="section-padding">
                             <h3>Thank you!</h3>
-                            <p>We are sorry to hear you cannot attend our big day. We'll miss you!</p>
+                            <h3 class="chinese-font">非常感谢!</h3>
+                            <p class="no-padding no-margin">We are sorry to hear you cannot attend our big day. We'll
+                                miss you!</p>
+                            <p class="chinese-font">很抱歉听到您無法参加我們的大日子。我們會想念您！</p>
                         </div>
                     </div>
                 </div><!-- /.modal-content -->
@@ -428,8 +434,10 @@
                         <div class="row">
                             <div class="col-md-12 col-sm-12">
                                 <div class="form-input-group">
-                                    <i class="fa fa-user"></i><input name="name" class=""
-                                        placeholder="Full name / 名字" required>
+                                    <i class="fa fa-user"></i><input name="name" class="" required
+                                        placeholder="Full name | 姓名" autocomplete="name"
+                                        oninvalid="this.setCustomValidity('Please fill out your name. | 請填寫姓名。')"
+                                        oninput="this.setCustomValidity('')">
                                 </div>
                             </div>
                         </div>
@@ -437,7 +445,7 @@
                             <div class="col-md-12" id="alert-wrapper"></div>
                         </div>
                         <button class="btn-fill rsvp-btn">
-                            Search
+                            Search | 搜索
                         </button>
                     </form>
                 </div>
@@ -470,7 +478,7 @@
                                         <div class="col-md-12" id="rsvp-alert-wrapper"></div>
                                     </div>
                                     <button class="btn-fill rsvp-btn">
-                                        Submit
+                                        Submit | 提交
                                     </button>
                                 </form>
                             </div>
