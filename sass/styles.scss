@@ -880,7 +880,7 @@ footer {
 Bootstrap override
 ========================================================================== */
 .modal-dialog {
-  top: 30vh;
+  top: 25vh;
 }
 
 body.modal-open {
@@ -892,6 +892,6 @@ body.modal-open {
 }
 
 .modal-content {
-  max-height: 500px;
+  max-height: 60vh;
   overflow-y: auto;
 }
