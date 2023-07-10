@@ -377,8 +377,7 @@ function create_individual_card(idx) {
 function create_name_field(name, rowIdx, idx) {
     var displayOrFillInput = '';
     if (name.startsWith('!')) {
-        var customErrMsg = "'Please fill out the name. | 請填寫姓名。'";
-        displayOrFillInput = '<input name="fill_name-' + idx + '" type="text" class="" required placeholder="Name | 姓名" oninvalid="this.setCustomValidity(' + customErrMsg + ')" oninput="this.setCustomValidity(\'\')">';
+        displayOrFillInput = '<input name="fill_name-' + idx + '" type="text" class="" placeholder="Name | 姓名">';
     } else {
         displayOrFillInput = '<input name="display_name-' + idx + '" type="text" class="" value="' + name + '" required readonly disabled>';
     }
