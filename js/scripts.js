@@ -145,26 +145,26 @@ $(document).ready(function () {
         },
         data: {
             // Event title
-            title: "謝鄭婚宴 | Cheuk & Pui Lam Banquet",
+            title: "謝鄭婚宴 | Cheuk and Pui Lam's Wedding Celebration",
 
             // Event start date
-            start: new Date('Nov 18, 2023 17:00'),
+            start: new Date('May 24, 2024 17:00'),
 
 
             // Event timezone. Will convert the given time to that zone
-            timezone: 'Asia/Hong_Kong',
+            timezone: 'America/New_York',
 
             // Event duration (IN MINUTES)
-            duration: 180,
+            duration: 360,
 
             // You can also choose to set an end time
             // If an end time is set, this will take precedence over duration
             // end: new Date('Nov 29, 2017 00:00'),
 
             // Event Address
-            // address: '75VC+F9 Tsim Sha Tsui, Hong Kong',
-            // address: 'https://goo.gl/maps/PE675c6zty6JSC8x5',
-            address: 'Serenade Chinese Restaurant, 2樓, 尖沙咀梳士巴利道10號香港文化中心大樓1, Tsim Sha Tsui, Hong Kong',
+            // address: 'Q332+66 New York',
+            // address: 'https://goo.gl/maps/meVZXLkusqno9PjA9',
+            address: 'The Foundry, 42-38 9th St, Queens, NY 11101',
 
             // Event Description
             // description: "We can't wait to see you on our big day."
@@ -190,7 +190,8 @@ $(document).ready(function () {
             )
         );
 
-        $.get('https://script.google.com/macros/s/AKfycbxNt0nokofAbTOHcIEnZnHrq_C9yXjzq_wDjbzUx_8Xfc_u9yeRlbivP9rB7Sd5YhsX/exec', data)
+        $.get('https://script.google.com/macros/s/AKfycbxtY38tu--ys0Ja57SYOE1aQlQccK98eYJW76AMKq9dOcck1loKzmtq3INR2Tm3AhaU/exec', data)
+        
             .done(function (data) {
                 var msg = data.en_message + '</br>' + data.ch_message;
                 if (data.result === "error") {
@@ -275,7 +276,7 @@ $(document).ready(function () {
             )
         );
 
-        $.post('https://script.google.com/macros/s/AKfycbxNt0nokofAbTOHcIEnZnHrq_C9yXjzq_wDjbzUx_8Xfc_u9yeRlbivP9rB7Sd5YhsX/exec', data)
+        $.post('https://script.google.com/macros/s/AKfycbxtY38tu--ys0Ja57SYOE1aQlQccK98eYJW76AMKq9dOcck1loKzmtq3INR2Tm3AhaU/exec', data)
             .done(function (data) {
                 if (data.result === "error") {
                     $('#rsvp-alert-wrapper').html(alert_markup('danger', data.message));
@@ -307,7 +308,7 @@ $(document).ready(function () {
 
 // Google map
 function initMap() {
-    var location = { lat: 22.2926668, lng: 114.1696784 };
+    var location = { lat: 40.7509434, lng: -73.951617 };
     var map = new google.maps.Map(document.getElementById('map-canvas'), {
         zoom: 15,
         center: location,
@@ -321,7 +322,7 @@ function initMap() {
 }
 
 function initBBSRMap() {
-    var location = { lat: 22.2926668, lng: 114.1696784 };
+    var location = { lat: 40.7509434, lng: -73.951617 };
     var map = new google.maps.Map(document.getElementById('map-canvas'), {
         zoom: 15,
         center: la_fiesta,

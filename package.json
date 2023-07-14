@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com:puilam-cheuk/wedding-website.git"
+    "url": "git+ssh://git@github.com:puilam-cheuk/wedding-ny.git"
   },
   "keywords": [
     "wedding",
@@ -17,7 +17,7 @@
   ],
   "author": "Cheuk Tse",
   "license": "GPL-3.0",
-  "homepage": "https://github.com/puilam-cheuk/wedding",
+  "homepage": "https://github.com/puilam-cheuk/wedding-ny",
   "devDependencies": {
     "browser-sync": "^2.29.1",
     "gulp": "^4.0.2",
