@@ -33,17 +33,22 @@ $(document).ready(function () {
         offset: '75%'
     });
     $('.wp7').waypoint(function () {
-        $('.wp7').addClass('animated fadeInUp');
+        $('.wp7').addClass('animated fadeInLeft');
     }, {
         offset: '75%'
     });
     $('.wp8').waypoint(function () {
-        $('.wp8').addClass('animated fadeInLeft');
+        $('.wp8').addClass('animated fadeInRight');
     }, {
         offset: '75%'
     });
     $('.wp9').waypoint(function () {
-        $('.wp9').addClass('animated fadeInRight');
+        $('.wp9').addClass('animated fadeInLeft');
+    }, {
+        offset: '75%'
+    });
+    $('.wp10').waypoint(function () {
+        $('.wp10').addClass('animated fadeInRight');
     }, {
         offset: '75%'
     });
@@ -145,7 +150,7 @@ $(document).ready(function () {
         },
         data: {
             // Event title
-            title: "謝鄭婚宴 | Cheuk and Pui Lam's Wedding Celebration",
+            title: "謝鄭婚禮 | Cheuk and Pui Lam's Wedding",
 
             // Event start date
             start: new Date('May 24, 2024 17:00'),
@@ -191,7 +196,7 @@ $(document).ready(function () {
         );
 
         $.get('https://script.google.com/macros/s/AKfycbxtY38tu--ys0Ja57SYOE1aQlQccK98eYJW76AMKq9dOcck1loKzmtq3INR2Tm3AhaU/exec', data)
-        
+
             .done(function (data) {
                 var msg = data.en_message + '</br>' + data.ch_message;
                 if (data.result === "error") {
