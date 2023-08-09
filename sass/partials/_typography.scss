@@ -8,6 +8,12 @@
 }
 
 @font-face {
+  font-family: 'Pen Crane';
+  src: url('../fonts/pen-crane.ttf');
+  unicode-range: U+4E00-9FFF;
+}
+
+@font-face {
   font-family: 'Hey Lovely';
   src: url('../fonts/hey-lovely.ttf');
 }
@@ -17,6 +23,7 @@
 $sans-serif: 'Open Sans', sans-serif;
 $serif: Merriweather, Georgia, 'Times New Roman', serif;
 $chinese-font: 'kaiti', 'Open Sans', sans-serif;
+$script-chinese-font: 'Pen Crane', 'kaiti', 'Open Sans', sans-serif;
 $script-font: 'Hey Lovely', sans-serif;
 $accent-font: 'Ink Free', sans-serif;
 
@@ -29,14 +36,25 @@ $bold: 700;
 
 // Sizes
 
-$font-size-h1: 60px;
-$font-size-h2: 40px;
-$font-size-h3: 24px;
-$font-size-h4: 18px;
-$font-size-h5: 15px;
-$font-size-p: 15px;
-$nav-font-size: 13px;
-$blog-post-title: 11px;
+// $font-size-h1: 60px;
+// $font-size-h2: 40px;
+$font-size-h3: 32px;
+// $font-size-h4: 22px;
+$font-size-h5: 16px;
+$font-size-p: 16px;
+$nav-font-size: 14px;
+$blog-post-title: 12px;
+
+// Chinese font sizes
+
+// $chinese-font-size-h1: 64px;
+// $chinese-font-size-h2: 44px;
+$chinese-font-size-h3: 28px;
+// $chinese-font-size-h4: 22px;
+$chinese-font-size-h5: 20px;
+$chinese-font-size-p: 20px;
+$chinese-nav-font-size: 18px;
+$chinese-blog-post-title: 16px;
 
 // Responsive Sizes
 
@@ -44,7 +62,7 @@ $responsive-h1: 40px;
 
 // Line height
 
-$base-line-height: 29px;
+$base-line-height: 32px;
 
 // Styles
 
@@ -56,34 +74,65 @@ p {
   line-height: $base-line-height;
   color: $txt-primary;
   padding-bottom: 20px;
+  &.chinese-font {
+    font-size: $chinese-font-size-p;
+  }
 }
 
-h1 {
-  font-size: $font-size-h1;
+span.chinese-font {
+  font-size: $chinese-font-size-p;
 }
 
-h2 {
-  font-size: $font-size-h2;
-  font-weight: $light;
-  color: $h2-color;
-}
+// h1 {
+//   font-size: $font-size-h1;
+//   &.chinese-font {
+//     font-size: $chinese-font-size-h1;
+//     margin-top: 0px;
+//   }
+// }
+
+// h2 {
+//   font-size: $font-size-h2;
+//   font-weight: $light;
+//   color: $h2-color;
+//   &.chinese-font {
+//     font-size: $chinese-font-size-h2;
+//     margin-top: 0px;
+//   }
+// }
 
 h3 {
   color: $h3-color;
-  font-size: $font-size-h4;
+  font-size: $font-size-h3;
   font-weight: $bold;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+  font-family: $script-font;
+  // text-transform: uppercase;
+  letter-spacing: 1px;
   line-height: $base-line-height;
+  &.chinese-font {
+    font-size: $chinese-font-size-h3;
+    font-weight: $semibold;
+    font-family: $script-chinese-font;
+    letter-spacing: -1px;
+    margin-top: 0px;
+  }
 }
 
-h4 {
-  font-size: $font-size-h4;
-}
+// h4 {
+//   font-size: $font-size-h4;
+//   &.chinese-font {
+//     font-size: $chinese-font-size-h4;
+//     margin-top: 0px;
+//   }
+// }
 
 h5 {
   font-size: $font-size-h5;
   color: $h5-color;
   text-transform: uppercase;
   font-weight: $semibold;
+  &.chinese-font {
+    font-size: $chinese-font-size-h5;
+    margin-top: 0px;
+  }
 }
