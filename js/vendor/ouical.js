@@ -333,7 +333,7 @@
         styles.id = 'add-to-calendar-css';
         
 
-        styles.innerHTML = "#add-to-calendar-label{margin-bottom:10px;cursor:pointer}.add-to-calendar a{margin:3px}.add-to-calendar-checkbox~a{display:none}.add-to-calendar-checkbox:checked~a{display:block;}input[type=checkbox].add-to-calendar-checkbox{display:none}";
+    styles.innerHTML = "#add-to-calendar-label{margin-bottom:10px;font-size:15px;cursor:pointer}.add-to-calendar a{margin:3px}.add-to-calendar-checkbox~a{display:none}.add-to-calendar-checkbox:checked~a{display:block;font-size:17px;padding-top:7px;}input[type=checkbox].add-to-calendar-checkbox{display:none}";
 
         return styles;
     };
