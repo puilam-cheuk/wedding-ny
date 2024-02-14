@@ -183,6 +183,16 @@
         padding: 0 20px;
     }
 
+    .other-events .leftcol {
+        padding: 0 20px;
+        margin-bottom: 20px;
+        border-right: none;
+    }
+
+    .other-events .rightcol {
+        padding: 0 20px;
+    }
+
     #eng-pics .row {
         margin-bottom: 30px;
     }

@@ -60,7 +60,7 @@ ol {
   padding: 0;
 }
 
-ul li {
+ul li .primary-nav {
   list-style: none;
 }
 
@@ -473,7 +473,7 @@ header {
 /* ==========================================================================
 .events
 ========================================================================== */
-.events {
+.events, .other-events {
   .leftcol {
     padding-right: 100px;
     border-right: solid 1px $keyline-color;
