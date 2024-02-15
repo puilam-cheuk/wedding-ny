@@ -473,7 +473,8 @@ header {
 /* ==========================================================================
 .events
 ========================================================================== */
-.events, .other-events {
+.events,
+.other-events {
   .leftcol {
     padding-right: 100px;
     border-right: solid 1px $keyline-color;
@@ -493,6 +494,10 @@ header {
       font-size: 16px;
       vertical-align: middle;
     }
+  }
+
+  .align-middle {
+    vertical-align: middle;
   }
 }
 
